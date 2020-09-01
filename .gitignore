@@ -17,3 +17,5 @@ tmp/
 dist
 coverage
 __coverage__
+.vscode
+package-lock.json
