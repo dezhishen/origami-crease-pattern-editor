@@ -6,13 +6,15 @@ import './assets/style/animations.scss'
 import './assets/style/main.scss'
 import router from './router/index'
 import store from './store/index'
-
+import Element from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 const isDev = process.env.NODE_ENV === 'development'
 
 Vue.config.devtools = isDev
 Vue.config.performance = isDev
 Vue.config.productionTip = isDev
 
+Vue.use(Element)
 // tslint:disable-next-line: no-unused-expression
 new Vue({
   el: '#app',

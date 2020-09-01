@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "bulma-fluent": "^0.3.25",
+    "element-ui": "^2.13.2",
     "material-design-icons": "^3.0.1",
     "p2": "^0.7.1",
     "vue": "^2.6.11",

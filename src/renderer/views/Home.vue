@@ -1,46 +1,41 @@
 <template>
-  <div>
-    <section class="hero is-dark is-bold">
-      <div class="hero-body">
-        <br />
-        <div class="block has-text-centered">
-          <figure class="image is-128x128">
-            <img alt="Placeholder image" src="../../../_icons/512pxblue.png" />
-          </figure>
-        </div>
-        <div class="content has-text-centered">
-          <h1 class="title is-4">
-            Vue-Electron-Template
-          </h1>
-          <p class="subtitle is-6">
-            The boilerplate for making electron applications using vue.js.
-          </p>
-          <RouterLink class="button is-primary" to="about">
-            <i class="material-icons">info</i>
-            <span>About</span>
-          </RouterLink>
-          <RouterLink class="button is-primary" to="help">
-            <i class="material-icons">help</i>
-            <span>Help</span>
-          </RouterLink>
-        </div>
-      </div>
-    </section>
+  <div style="margin-top:5px;margin-bottom:5px">
+    <el-container>
+      <el-header style="height:35px">
+        <el-button type="text" size="small">导入</el-button>
+        <el-button type="text" size="small">导出</el-button>
+        <el-button type="text" size="small">折叠</el-button>
+      </el-header>
+      <el-container>
+        <el-aside style="width:70px">
+          <div style="margin-left:5px">
+            <el-row>
+              <el-button type="text" size="small">峰线</el-button>
+            </el-row>
+            <el-row>
+              <el-button type="text" size="small">谷线</el-button>
+            </el-row>
+            <el-row>
+              <el-button type="text" size="small">辅助线</el-button>
+            </el-row>
+          </div>
+        </el-aside>
+        <el-main>[][][]</el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-enum TEST {}
-
 export default Vue.extend({
   name: 'Home',
+  data: function () {
+    return { title: '~' }
+  },
 })
 </script>
 
 <style>
-.hero-body {
-  height: 100vh;
-}
 </style>
