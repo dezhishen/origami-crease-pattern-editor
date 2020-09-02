@@ -3,7 +3,7 @@
     <el-container>
       <el-header style="height:35px">
         <el-button type="text" size="small">导入</el-button>
-        <el-button type="text" size="small">导出</el-button>
+        <el-button type="text" @click="export" size="small">导出</el-button>
         <el-button type="text" size="small">折叠</el-button>
       </el-header>
       <el-container>
@@ -28,12 +28,21 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import p2 from 'p2'
 
 export default Vue.extend({
   name: 'Home',
   data: function () {
     return { title: '~' }
   },
+  methods:{
+    export:function(){
+      console.log("我是导出方法")
+    }
+  },
+  mounted:function(){
+    //todo init p2
+  }
 })
 </script>
 
