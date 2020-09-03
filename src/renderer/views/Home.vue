@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:5px;margin-bottom:5px">
+  <div style="margin-top:5px;margin-bottom:5px;height:100%">
     <el-container>
       <el-container>
         <el-aside style="width:300px;border:1px solid grey;height:100%;">
@@ -92,7 +92,9 @@ export default Vue.extend({
 </script>
 
 <style>
-
+.el-container{
+  height: 100%;
+}
  .node_layer {
   padding-left: 20px;
   background: url('/static/images/layer.ico') no-repeat 0 3px;

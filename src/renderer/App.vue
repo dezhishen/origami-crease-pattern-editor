@@ -18,7 +18,7 @@ export default Vue.extend({
 
 <style lang="scss">
 html{
-  height: 100%;
+  height: 95%;
 }
 body {
   height: 100%;
