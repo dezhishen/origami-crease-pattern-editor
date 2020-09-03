@@ -11,6 +11,7 @@
               :data="treeData"
               show-checkbox
               default-expand-all
+              :default-checked-keys = "[1,2,3,4,5,6]"
               node-key="id"
               ref="tree"
               highlight-current
