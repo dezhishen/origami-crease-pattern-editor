@@ -17,4 +17,10 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+html{
+  height: 100%;
+}
+.container-fluid {
+  height:100%
+}
 </style>
