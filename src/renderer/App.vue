@@ -18,10 +18,11 @@ export default Vue.extend({
 
 <style lang="scss">
 html{
-  height: 95%;
+  height: 100%;
 }
 body {
   height: 100%;
+  padding: 5px;
 }
 .container-fluid {
   height:100%

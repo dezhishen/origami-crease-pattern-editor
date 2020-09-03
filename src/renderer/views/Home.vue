@@ -1,5 +1,5 @@
 <template>
-  <div style="margin-top:5px;margin-bottom:5px;height:100%">
+  <div>
     <el-container>
       <el-container>
         <el-aside style="width:300px;border:1px solid grey;height:100%;">
