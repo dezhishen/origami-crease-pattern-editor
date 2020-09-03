@@ -22,7 +22,7 @@ html{
 }
 body {
   height: 100%;
-  padding: 5px;
+  padding: 2px;
 }
 .container-fluid {
   height:100%
