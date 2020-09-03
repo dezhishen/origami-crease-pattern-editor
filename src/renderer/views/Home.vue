@@ -74,6 +74,10 @@
             </el-tabs>
           </div>
         </el-aside>
+         <div style="overflow: hidden;z-index: 9999;position: fixed;left:270px;top:30%
+         ;background-color:silver;height:40px;border-bottom-right-radius: 4px;border-top-right-radius: 4px;" >
+          <i class="el-icon-arrow-left" style="padding-top:12px;"></i>
+        </div>
         <el-main style="background-color:#f3f3f3">
           我是画布
         </el-main>
