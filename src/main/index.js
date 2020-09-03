@@ -138,35 +138,48 @@ const sendMenuEvent = async (data) => {
 
 const template = [
   {
-    label: app.name,
+    //label: app.name,
+    label: '文件',
     submenu: [
+      // {
+      //   label: 'Home',
+      //   accelerator: 'CommandOrControl+H',
+      //   click() {
+      //     sendMenuEvent({ route: '/' })
+      //   },
+      // },
+      // { type: 'separator' },
+      // { role: 'minimize' },
+      // { role: 'togglefullscreen' },
       {
-        label: 'Home',
-        accelerator: 'CommandOrControl+H',
-        click() {
-          sendMenuEvent({ route: '/' })
-        },
+        label: '导出',
+        submenu:[
+            { label:'导出png'},
+            { type: 'separator' },
+            { label:'导出jpg' },
+            { type: 'separator' },
+            { label:'导出json'}
+        ],
       },
+     
       { type: 'separator' },
-      { role: 'minimize' },
-      { role: 'togglefullscreen' },
-      { type: 'separator' },
-      { role: 'quit', accelerator: 'Alt+F4' },
+      { label: '退出' , role: 'quit', accelerator: 'Alt+F4' },
     ],
   },
   {
+    label: '帮助',
     role: 'help',
     submenu: [
+      // {
+      //   label: 'Get Help',
+      //   role: 'help',
+      //   accelerator: 'F1',
+      //   click() {
+      //     sendMenuEvent({ route: '/help' })
+      //   },
+      // },
       {
-        label: 'Get Help',
-        role: 'help',
-        accelerator: 'F1',
-        click() {
-          sendMenuEvent({ route: '/help' })
-        },
-      },
-      {
-        label: 'About',
+        label: '关于',
         role: 'about',
         accelerator: 'CommandOrControl+A',
         click() {

@@ -1,23 +1,31 @@
 <template>
   <div style="margin-top:5px;margin-bottom:5px">
     <el-container>
-      <el-header style="height:35px">
-        <el-button type="text" size="small">导入</el-button>
-        <el-button type="text" @click="handleExport" size="small">导出</el-button>
-        <el-button type="text" size="small">折叠</el-button>
-      </el-header>
       <el-container>
-        <el-aside style="width:70px">
-          <div style="margin-left:5px">
-            <el-row>
-              <el-button type="text" size="small">峰线</el-button>
-            </el-row>
-            <el-row>
-              <el-button type="text" size="small">谷线</el-button>
-            </el-row>
-            <el-row>
-              <el-button type="text" size="small">辅助线</el-button>
-            </el-row>
+        <el-aside style="width:300px;border:1px solid grey;height:100%;">
+          <div>
+            <el-tree
+              :data="treeData"
+              show-checkbox
+              default-expand-all
+              node-key="id"
+              ref="tree"
+              highlight-current
+              :props="defaultProps">
+              <span class="custom-tree-node" slot-scope="{ node,data }">
+                <span style="margin-left:5px"> 
+                  <i :class="data.icon"></i>{{ node.label }}
+                </span>              
+              </span>
+            </el-tree>
+          </div>
+          <div> 
+            <el-tabs type="border-card" style="height:100%;">
+              <el-tab-pane label="点编辑">点编辑</el-tab-pane>
+              <el-tab-pane label="线编辑">线编辑</el-tab-pane>
+              <el-tab-pane label="网格编辑">网格编辑</el-tab-pane>
+              <el-tab-pane label="画布工具">画布工具</el-tab-pane>
+            </el-tabs>
           </div>
         </el-aside>
         <el-main>[][][]</el-main>
@@ -32,12 +40,50 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'Home',
   data: function () {
-    return { title: '~' }
+  
+    const treeData =  [{
+          id: 1,
+          label: '画布图层',
+          icon: 'node_layer',
+          children: [
+            {
+              id: 2,
+              label: '网格',
+              icon: 'node_grid',
+            },
+            {
+              id: 3,
+              label: '节点',
+              icon: 'node_vertex',
+            }, 
+            {
+              id: 4,
+              label: '山线',
+              icon: 'node_m',
+            }, 
+            {
+              id: 5,
+              label: '谷线',
+              icon: 'node_v',
+            }, 
+            {
+              id:6,
+              label: '辅助线',
+              icon: 'node_a',
+            }
+          ]
+        }]
+    return { 
+      title: '~',
+      treeData: treeData,
+        defaultProps: {
+          children: 'children',
+          label: 'label',
+        }
+      }
   },
   methods:{
-    handleExport:function(){
-      console.log("我是导出方法")
-    }
+
   },
   mounted:function(){
     //todo init p2
@@ -46,4 +92,33 @@ export default Vue.extend({
 </script>
 
 <style>
+
+ .node_layer {
+  padding-left: 20px;
+  background: url('/static/images/layer.ico') no-repeat 0 3px;
+ }
+  .node_grid {
+  padding-left: 20px;
+  background: url('/static/images/grid.ico') no-repeat 0 3px;
+ }
+  .node_vertex {
+  padding-left: 20px;
+  background: url('/static/images/dotblack.ico') no-repeat 0 3px;
+ }
+  .node_m {
+  padding-left: 20px;
+  background: url('/static/images/redline.ico') no-repeat 0 3px;
+ }
+  .node_v {
+  padding-left: 20px;
+  background: url('/static/images/blueline.ico') no-repeat 0 3px;
+ }
+
+   .node_a {
+  padding-left: 20px;
+  background: url('/static/images/greyline.ico') no-repeat 0 3px;
+ }
+
+
+
 </style>
