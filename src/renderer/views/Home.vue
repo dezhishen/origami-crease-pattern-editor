@@ -3,7 +3,7 @@
     <el-container>
       <el-container>
         <el-aside style="width:300px;border:1px solid grey;height:100%;">
-          <div>
+          <div style="height:60%;">
             <el-tree
               :data="treeData"
               show-checkbox
@@ -19,7 +19,7 @@
               </span>
             </el-tree>
           </div>
-          <div> 
+          <div style="height:40%;"> 
             <el-tabs type="border-card" style="height:100%;">
               <el-tab-pane label="点编辑">点编辑</el-tab-pane>
               <el-tab-pane label="线编辑">线编辑</el-tab-pane>
