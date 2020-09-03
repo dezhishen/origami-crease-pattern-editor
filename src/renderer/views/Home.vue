@@ -1,9 +1,12 @@
 <template>
-  <div>
+  <div style="height:100%;">
     <el-container>
       <el-container>
-        <el-aside style="width:300px;border:1px solid grey;height:100%;">
-          <div style="height:60%;">
+        <el-aside style="width:300px;border:2px solid silver;height:100%;">
+          <div style="height:35%;">
+            <div style="height:auto;background-color: rgba(49, 110, 175, 0.95);">
+             <span style="margin-left:10px;color: white;">图层控制</span>
+            </div>
             <el-tree
               :data="treeData"
               show-checkbox
@@ -19,7 +22,7 @@
               </span>
             </el-tree>
           </div>
-          <div style="height:40%;"> 
+          <div style="height:65%;"> 
             <el-tabs type="border-card" style="height:100%;">
               <el-tab-pane label="点编辑">点编辑</el-tab-pane>
               <el-tab-pane label="线编辑">线编辑</el-tab-pane>
@@ -28,7 +31,9 @@
             </el-tabs>
           </div>
         </el-aside>
-        <el-main>[][][]</el-main>
+        <el-main style="background-color:#f3f3f3">
+          我是画布
+        </el-main>
       </el-container>
     </el-container>
   </div>
