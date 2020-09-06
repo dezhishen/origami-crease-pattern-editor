@@ -71,13 +71,7 @@
           <div style="height:65%;">
             <el-tabs type="border-card" v-model="activeTab" style="height:100%;">
               <el-tab-pane v-if="curLayerId===3" name="point" label="点编辑" style="display:none;">
-                <el-switch v-model="addPoint" active-text inactive-text="添加点"></el-switch>
-                <el-switch
-                  v-model="delPoint"
-                  active-text
-                  inactive-text="删除点"
-                  style="padding-left:30px;"
-                ></el-switch>
+                <el-switch v-model="pointAction" active-text="添加点" inactive-text="删除点"></el-switch>
               </el-tab-pane>
               <el-tab-pane
                 name="line"
@@ -85,18 +79,12 @@
                 label="线编辑"
                 style="display:none;"
               >
-                <el-switch v-model="addLine" active-text inactive-text="添加线"></el-switch>
-                <el-switch
-                  v-model="delLine"
-                  active-text
-                  inactive-text="删除线"
-                  style="padding-left:30px;"
-                ></el-switch>
+                <el-switch v-model="lineAction" active-text="添加线" inactive-text="删除线"></el-switch>
               </el-tab-pane>
               <el-tab-pane name="grid" v-if="curLayerId===2" label="网格编辑" style="display:none;">
                 <template>
                   <el-form class="demo-form-inline" style="padding-left:10px;">
-                    <el-form-item label="设置等分数">
+                    <el-form-item label="等分数">
                       <el-input-number
                         v-model="gridNum"
                         controls-position="right"
@@ -108,9 +96,9 @@
                     </el-form-item>
                     <el-form-item>
                       <el-button-group>
-                        <el-button type="primary">X2</el-button>
-                        <el-button type="primary">X1/2</el-button>
-                        <el-button type="primary" icon="el-icon-delete">归零</el-button>
+                        <el-button type="primary" @click="handleGridMultiply">X2</el-button>
+                        <el-button type="primary" @click="handleGridDivide">X1/2</el-button>
+                        <el-button type="primary" @click="handleGridClear">归零</el-button>
                       </el-button-group>
                     </el-form-item>
                   </el-form>
@@ -157,13 +145,27 @@ export default Vue.extend({
         label: 'label',
         isLeaf: 'isLeaf',
       },
-      addPoint: false,
-      delPoint: false,
-      addLine: false,
-      delLine: false,
+      pointAction: true,
+      lineAction: true,
     }
   },
   methods: {
+    handleGridClear: function () {
+      this.gridNum = 0
+    },
+    handleGridMultiply: function () {
+      if (!this.gridNum || this.gridNum === 0) {
+        this.gridNum = 2
+      } else {
+        this.gridNum = this.gridNum * 2
+      }
+    },
+    handleGridDivide: function () {
+      if (!this.gridNum || this.gridNum === 0 || this.gridNum === 2) {
+        return
+      }
+      this.gridNum = this.gridNum / 2
+    },
     handelLayerChange(val) {
       this.activeTab = this.layerActiveMap[val]
     },
