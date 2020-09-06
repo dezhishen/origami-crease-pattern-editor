@@ -46,14 +46,18 @@
                     ],
                   }]"
               default-expand-all
-              :default-checked-keys="[1,2,3,4,5,6]"
               node-key="id"
               ref="tree"
               highlight-current
               :props="defaultProps"
             >
               <template class="custom-tree-node" slot-scope="{ node,data }">
-                <el-radio v-if="node.isLeaf" v-model="curLayerId" :label="data.id">
+                <el-radio
+                  v-if="node.isLeaf"
+                  @change="handelLayerChange"
+                  v-model="curLayerId"
+                  :label="data.id"
+                >
                   <i :class="data.icon"></i>
                   {{node.label}}
                 </el-radio>
@@ -65,8 +69,8 @@
             </el-tree>
           </div>
           <div style="height:65%;">
-            <el-tabs type="border-card" style="height:100%;">
-              <el-tab-pane label="点编辑" style="display:none;">
+            <el-tabs type="border-card" v-model="activeTab" style="height:100%;">
+              <el-tab-pane v-if="curLayerId===3" name="point" label="点编辑" style="display:none;">
                 <el-switch v-model="addPoint" active-text inactive-text="添加点"></el-switch>
                 <el-switch
                   v-model="delPoint"
@@ -75,7 +79,12 @@
                   style="padding-left:30px;"
                 ></el-switch>
               </el-tab-pane>
-              <el-tab-pane label="线编辑" style="display:none;">
+              <el-tab-pane
+                name="line"
+                v-if="curLayerId===4||curLayerId===5||curLayerId===6"
+                label="线编辑"
+                style="display:none;"
+              >
                 <el-switch v-model="addLine" active-text inactive-text="添加线"></el-switch>
                 <el-switch
                   v-model="delLine"
@@ -84,29 +93,31 @@
                   style="padding-left:30px;"
                 ></el-switch>
               </el-tab-pane>
-              <el-tab-pane label="网格编辑" style="display:none;">
-                <el-form class="demo-form-inline" style="padding-left:10px;">
-                  <el-form-item label="设置等分数">
-                    <el-input-number
-                      v-model="gridNum"
-                      controls-position="right"
-                      @change="handleGridChange"
-                      :min="0"
-                      :max="256"
-                      size="small"
-                    ></el-input-number>
-                  </el-form-item>
-                  <el-form-item>
-                    <el-button-group>
-                      <el-button type="primary">X2</el-button>
-                      <el-button type="primary">X1/2</el-button>
-                      <el-button type="primary" icon="el-icon-delete">归零</el-button>
-                    </el-button-group>
-                  </el-form-item>
-                </el-form>
+              <el-tab-pane name="grid" v-if="curLayerId===2" label="网格编辑" style="display:none;">
+                <template>
+                  <el-form class="demo-form-inline" style="padding-left:10px;">
+                    <el-form-item label="设置等分数">
+                      <el-input-number
+                        v-model="gridNum"
+                        controls-position="right"
+                        @change="handleGridChange"
+                        :min="0"
+                        :max="256"
+                        size="small"
+                      ></el-input-number>
+                    </el-form-item>
+                    <el-form-item>
+                      <el-button-group>
+                        <el-button type="primary">X2</el-button>
+                        <el-button type="primary">X1/2</el-button>
+                        <el-button type="primary" icon="el-icon-delete">归零</el-button>
+                      </el-button-group>
+                    </el-form-item>
+                  </el-form>
+                </template>
               </el-tab-pane>
-              <el-tab-pane label="画布工具">比如 撤销 重做 平移 缩放 旋转</el-tab-pane>
-              <el-tab-pane label="选择工具">支持点选 框选 然后操作选中要素</el-tab-pane>
+              <el-tab-pane name="layerTool" label="画布工具">比如 撤销 重做 平移 缩放 旋转</el-tab-pane>
+              <el-tab-pane name="chooseTool" label="选择工具">支持点选 框选 然后操作选中要素</el-tab-pane>
             </el-tabs>
           </div>
         </el-aside>
@@ -123,14 +134,23 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 
 export default Vue.extend({
   name: 'Home',
   data: function () {
     return {
-      curLayerId: null,
+      activeTab: 'grid',
+      curLayerId: 2,
+      layerActiveMap: {
+        2: 'grid',
+        3: 'point',
+        4: 'line',
+        5: 'line',
+        6: 'line',
+      },
+      activeTabs: ['grid', 'layerTool', 'chooseTool'],
       gridNum: 0,
       defaultProps: {
         children: 'children',
@@ -144,13 +164,16 @@ export default Vue.extend({
     }
   },
   methods: {
-    handleGridChange(value: any) {
+    handelLayerChange(val) {
+      this.activeTab = this.layerActiveMap[val]
+    },
+    handleGridChange(value) {
       console.log(value)
     },
     handleTreeVis() {
       console.log(111)
     },
-    handleLayerClick(node: any) {
+    handleLayerClick(node) {
       console.log(node.label)
       this.curLayerId = node.id
       if (node.id == 3) {
