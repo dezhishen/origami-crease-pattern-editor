@@ -27,6 +27,7 @@ import Vue from 'vue'
 export default Vue.extend({
 
   data: function () {
+    let pointDrawer = false;
     let treeData = [{
             id: 1,
             label: '画布图层',
@@ -63,15 +64,29 @@ export default Vue.extend({
                     isLeaf:true
                 },
                 ],
-            }]
+            }];
+            
+    
     return {
-        treeData:treeData
+        treeData:treeData,
+        defaultProps: {
+        children: 'children',
+        label: 'label',
+        isLeaf: 'isLeaf',
+        pointDrawer: pointDrawer,
+      },
     }
   },
   methods: {
     handleLayerClick(node,data) {
-      console.log(node.label)
-      console.log(data.id)
+      console.log(node.label);
+      console.log(data.id);
+      if(data.id == 3){
+          this.pointDrawer = true;
+          console.log( this.pointDrawer);
+          this.$emit('treeNodeClick',"yes commander")
+      }
+
     },
   },
   mounted: function () {

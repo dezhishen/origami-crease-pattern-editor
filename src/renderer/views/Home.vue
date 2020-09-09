@@ -7,7 +7,7 @@
             <div style="height:auto;background-color: rgba(49, 110, 175, 0.95);">
               <span style="margin-left:10px;color: white;">图层控制</span>
             </div>
-            <LayerTree></LayerTree>
+            <layer-tree @treeNodeClick="handleDrawer"></layer-tree>
           </div>
           <div style="height:65%;">
             <el-tabs type="border-card" v-model="activeTab" style="height:100%;">
@@ -47,7 +47,11 @@
         >
           <i class="el-icon-arrow-left" style="padding-top:12px;"></i>
         </div>
-        <el-main style="background-color:#f3f3f3">我是画布</el-main>
+        <el-main style="background-color:#f3f3f3">
+          我是画布
+        <tool-drawer ref="pointToolBar" ></tool-drawer>
+        </el-main>
+        
       </el-container>
     </el-container>
   </div>
@@ -56,33 +60,21 @@
 <script>
 import Vue from 'vue'
 import LayerTree from '../components/LayerTree.vue'
+import ToolDrawer from '../components/ToolDrawer.vue'
 
 export default Vue.extend({
   name: 'Home',
   components: {
-    LayerTree
+    LayerTree,
+    ToolDrawer,
   },
   data: function () {
+    let pointDrawer = false;
     return {
       activeTab: 'none',
       curLayerId: 10,
-      layerActiveMap: {
-        2: 'grid',
-        3: 'point',
-        4: 'line',
-        5: 'line',
-        6: 'line',
-        10: 'none',
-      },
-      activeTabs: ['grid', 'layerTool', 'chooseTool','none'],
       gridNum: 0,
-      defaultProps: {
-        children: 'children',
-        label: 'label',
-        isLeaf: 'isLeaf',
-      },
-      pointAction: true,
-      lineAction: true,
+      pointDrawer:pointDrawer,
     }
   },
   methods: {
@@ -112,6 +104,12 @@ export default Vue.extend({
     handleTreeVis() {
       console.log(111)
     },
+    handleDrawer(val){
+      this.pointDrawer = true;
+      console.log(val);
+      this.$refs.pointToolBar.setDrawer(this.pointDrawer);
+    },
+
   },
   mounted: function () {
     //todo init p2
@@ -124,11 +122,5 @@ export default Vue.extend({
   height: 100%;
 }
 
-.ptShow {
-  display: inline;
-}
 
-.ptHide {
-  display: none;
-}
 </style>
