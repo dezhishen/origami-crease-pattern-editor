@@ -73,7 +73,6 @@ export default Vue.extend({
         children: 'children',
         label: 'label',
         isLeaf: 'isLeaf',
-        pointDrawer: pointDrawer,
       },
     }
   },
@@ -81,11 +80,7 @@ export default Vue.extend({
     handleLayerClick(node,data) {
       console.log(node.label);
       console.log(data.id);
-      if(data.id == 3){
-          this.pointDrawer = true;
-          console.log( this.pointDrawer);
-          this.$emit('treeNodeClick',"yes commander")
-      }
+       this.$emit('treeNodeClick', data.id)
 
     },
   },
