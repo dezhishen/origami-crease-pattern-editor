@@ -1,24 +1,23 @@
 <template>
-    <el-tree
+  <el-tree
     :data= treeData
-        default-expand-all
-        node-key="id"
-        ref="tree"
-        show-checkbox
-        :default-checked-keys = "[1,2,3,4,5,6]"
-        :highlight-current = true
-        :props="defaultProps"
-        >
-        <template class="custom-tree-node" slot-scope="{ node,data }">
-    
-        <span
-            @click="handleLayerClick(node,data)"
-            :label="data.id">
-            <i :class="data.icon"></i>
-                {{node.label}}
-        </span >
-    </template>
-    </el-tree>
+    default-expand-all
+    node-key="id"
+    ref="tree"
+    show-checkbox
+    :default-checked-keys = "[1,2,3,4,5,6]"
+    :highlight-current = true
+    @node-click=handleLayerClick
+    :props="defaultProps"
+    >
+      <template class="custom-tree-node" slot-scope="{ node,data }">
+      <span
+          :label="data.id">
+          <i :class="data.icon"></i>
+              {{node.label}}
+      </span >
+  </template>
+  </el-tree>
 </template>
 
 <script>
@@ -78,15 +77,14 @@ export default Vue.extend({
     }
   },
   methods: {
-    handleLayerClick(node,data) {
-      console.log(node.label);
-      console.log(data.id);
-      if(data.id == 3){
-          this.pointDrawer = true;
-          console.log( this.pointDrawer);
-          this.$emit('treeNodeClick',"yes commander")
+    handleLayerClick(obj,_node,_nodeDom) {
+      console.log("对象=>",obj);
+      console.log("节点=>",_node)
+      if(obj.id===3){  
+        this.pointDrawer = true;
+        console.log( this.pointDrawer);
+        this.$emit('treeNodeClick',"yes commander")
       }
-
     },
   },
   mounted: function () {

@@ -16,14 +16,13 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-
   data: function () {
     return {
-        props: {
-            drawer: false,
-        },
-
+        
     }
+  },
+  props: {
+      drawer: Boolean
   },
   methods: {
     handleClose(done) {
