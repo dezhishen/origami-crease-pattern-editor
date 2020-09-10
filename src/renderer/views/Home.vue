@@ -17,8 +17,7 @@
                 <line-tab v-show = "lineVis"></line-tab>
                 <point-tab v-show = "pointVis"></point-tab>
               </el-tab-pane>
-              <el-tab-pane name="canvasTool" label="画布工具">比如 撤销 重做 平移 缩放 旋转</el-tab-pane>
-             
+              <el-tab-pane name="canvasTool" label="画布工具">比如 撤销 重做 平移 缩放 旋转</el-tab-pane>  
               <!-- <el-tab-pane name="chooseTool" label="选择工具" style="display:none;">支持点选 框选 然后操作选中要素</el-tab-pane> -->
             </el-tabs>
           </div>
