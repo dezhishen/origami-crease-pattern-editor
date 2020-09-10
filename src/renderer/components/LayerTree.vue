@@ -1,24 +1,23 @@
 <template>
-    <el-tree
+  <el-tree
     :data= treeData
-        default-expand-all
-        node-key="id"
-        ref="tree"
-        show-checkbox
-        :default-checked-keys = "[1,2,3,4,5,6]"
-        :highlight-current = true
-        :props="defaultProps"
-        >
-        <template class="custom-tree-node" slot-scope="{ node,data }">
-    
-        <span
-            @click="handleLayerClick(node,data)"
-            :label="data.id">
-            <i :class="data.icon"></i>
-                {{node.label}}
-        </span >
-    </template>
-    </el-tree>
+    default-expand-all
+    node-key="id"
+    ref="tree"
+    show-checkbox
+    :default-checked-keys = "[1,2,3,4,5,6]"
+    :highlight-current = true
+    @node-click=handleLayerClick
+    :props="defaultProps"
+    >
+      <template class="custom-tree-node" slot-scope="{ node,data }">
+      <span
+          :label="data.id">
+          <i :class="data.icon"></i>
+              {{node.label}}
+      </span >
+  </template>
+  </el-tree>
 </template>
 
 <script>
