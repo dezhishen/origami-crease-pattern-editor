@@ -72,10 +72,10 @@
   "main": "./dist/main.js",
   "name": "vue-electron-template",
   "private": true,
-  "productName": "Vue Electron Template",
+  "productName": "origami-crease-pattern-editor",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mubaidr/vue-electron-template.git"
+    "url": "git+https://github.com/dezhiShen/origami-crease-pattern-editor"
   },
   "scripts": {
     "build": "run-s rebuild:electron pack build-release",
