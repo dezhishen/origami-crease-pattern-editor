@@ -36,6 +36,7 @@ export default Vue.extend({
       if(!this.addpoint){
         this.addpoint = true;
         this.delpoint = false;
+        this.cbgDelPoint = [];
       }else{
         this.addpoint = false;
       }
@@ -44,10 +45,10 @@ export default Vue.extend({
       if(!this.delpoint){
         this.delpoint = true;
         this.addpoint = false;
+        this.cbgAddPoint = [];
       }else{
         this.delpoint = false;
       }
-
     },
 
   },
