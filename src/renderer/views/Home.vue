@@ -26,7 +26,9 @@
           <i class="el-icon-arrow-left" style="padding-top:12px;"></i>
         </div>
         <el-main style="background-color:#f3f3f3">
-          我是画布
+          <template id="main" ref="mainCanvas">
+
+          </template>
         </el-main>
       </el-container>
     </el-container>
@@ -39,6 +41,7 @@ import LayerTree from '../components/LayerTree.vue'
 import GridTab from '../components/GridTab.vue'
 import LineTab from '../components/LineTab.vue'
 import PointTab from '../components/PointTab.vue'
+import fabric from 'fabric'
 
 export default Vue.extend({
   name: 'Home',
@@ -55,10 +58,13 @@ export default Vue.extend({
       lineVis:false,
       pointVis:false,
       curLayerId: -1,
+      carvans: null,
+      groups:{
+        "id":"group"
+      }
     }
   },
   methods: {
-   
     handelLayerChange(val) {
       this.curLayerId = val;
       this.gridVis = false;
@@ -82,7 +88,8 @@ export default Vue.extend({
     },
   },
   mounted: function () {
-    //todo init p2
+    //init
+    this.carvans=new fabric.Canvas('main');
   },
 })
 </script>
