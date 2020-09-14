@@ -26,9 +26,7 @@
           <i class="el-icon-arrow-left" style="padding-top:12px;"></i>
         </div>
         <el-main style="background-color:#f3f3f3">
-          <template id="main" ref="mainCanvas">
-
-          </template>
+          <canvas  id="main" ref="mainCanvas"></canvas>
         </el-main>
       </el-container>
     </el-container>
@@ -41,7 +39,9 @@ import LayerTree from '../components/LayerTree.vue'
 import GridTab from '../components/GridTab.vue'
 import LineTab from '../components/LineTab.vue'
 import PointTab from '../components/PointTab.vue'
-import fabric from 'fabric'
+import Fabric from 'fabric'
+
+Vue.use(Fabric);
 
 export default Vue.extend({
   name: 'Home',
@@ -89,7 +89,15 @@ export default Vue.extend({
   },
   mounted: function () {
     //init
-    this.carvans=new fabric.Canvas('main');
+    var canvas=new fabric.Canvas('main');
+     var rect = new fabric.Rect({
+        top : 25,
+        left : 100,
+        width : 100,
+        height : 100,
+        fill : 'red'
+    });
+    canvas.add(rect);
   },
 })
 </script>
@@ -127,6 +135,9 @@ export default Vue.extend({
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
   display: none;
+}
+canvas{
+   border: 1px dashed black;
 }
 
 </style>
