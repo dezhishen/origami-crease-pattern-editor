@@ -89,20 +89,25 @@ export default Vue.extend({
   },
   mounted: function () {
     //init
-    var canvas=new fabric.Canvas('main');
+     var canvas=new fabric.Canvas('main');
+     canvas.setDimensions({width: '100%', height: '100%'}, {cssOnly: true});
+     canvas.imageSmoothingEnabled = false;
+
      var rect = new fabric.Rect({
         top : 25,
         left : 100,
-        width : 100,
-        height : 100,
+        width : 0.5,
+        height : 0.5,
         fill : 'red'
     });
     canvas.add(rect);
+    canvas.centerObject(rect);
+    canvas.renderAll();
   },
 })
 </script>
 
-<style>
+<style scoped>
 .el-container {
   height: 100%;
 }
@@ -111,6 +116,11 @@ export default Vue.extend({
   border:2px solid silver;
   height:100%;
 }
+
+.el-main{
+  padding:0px;
+}
+
 .layer-tree-container{
   height:35%;
   overflow:auto;
@@ -136,7 +146,7 @@ export default Vue.extend({
   border-top-right-radius: 4px;
   display: none;
 }
-canvas{
+#main{
    border: 1px dashed black;
 }
 
