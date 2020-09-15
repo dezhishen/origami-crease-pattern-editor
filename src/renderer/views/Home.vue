@@ -25,8 +25,10 @@
         <div class ="layer-tree-switch" @click="handleTreeVis">
           <i class="el-icon-arrow-left" style="padding-top:12px;"></i>
         </div>
-        <el-main style="background-color:#f3f3f3">
-          <canvas  id="main" ref="mainCanvas"></canvas>
+        <el-main  style="background-color:#f3f3f3">
+          <div ref = "canvasContainer" id = "test">
+            <canvas  id="main" ref="mainCanvas"></canvas>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -86,23 +88,41 @@ export default Vue.extend({
     handleTreeVis() {
       console.log(111)
     },
+
+    resizeCanvas() {
+      this.canvas = document.getElementById("main");
+      let parentStyle = window.getComputedStyle(this.canvas.parentNode);
+      this.canvas.width = parseInt(parentStyle.width);
+      this.canvas.height = parseInt(parentStyle.height);
+    },
+
+
   },
   mounted: function () {
     //init
-     var canvas=new fabric.Canvas('main');
-     canvas.setDimensions({width: '100%', height: '100%'}, {cssOnly: true});
-     canvas.imageSmoothingEnabled = false;
+     this.resizeCanvas();
 
+     var canvas=new fabric.Canvas('main');
      var rect = new fabric.Rect({
         top : 25,
         left : 100,
-        width : 0.5,
-        height : 0.5,
+        width : 100,
+        height : 100,
         fill : 'red'
     });
     canvas.add(rect);
     canvas.centerObject(rect);
     canvas.renderAll();
+    window.addEventListener("resize", () => {
+      this.resizeCanvas();
+      console.log("现在在拉伸哦!");
+
+      setTimeout(function() {
+        //todo:重绘
+      }, 100);
+    });
+
+
   },
 })
 </script>
@@ -149,5 +169,8 @@ export default Vue.extend({
 #main{
    border: 1px dashed black;
 }
-
+#test{
+  width: 100%;
+  height: 100%;
+}
 </style>
