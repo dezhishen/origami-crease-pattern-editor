@@ -100,9 +100,9 @@ export default Vue.extend({
   mounted: function () {
     //init
     //this.resizeCanvas();
-      
-      var canvas=new fabric.Canvas('main',{width:this.$refs.cc.$el.clientWidth,height: this.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
-      var rect = new fabric.Rect({
+      const that = this
+      let canvas = new fabric.Canvas('main',{width:that.$refs.cc.$el.clientWidth,height: that.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
+      let rect = new fabric.Rect({
           top : 25,
           left : 100,
           width : 100,
@@ -119,10 +119,10 @@ export default Vue.extend({
 
     window.addEventListener("resize", () => {
       //this.resizeCanvas();
-      
+      const that = this
       setTimeout(function() {
-          var canvas=new fabric.Canvas('main',{width:this.$refs.cc.$el.clientWidth,height: this.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
-          var rect = new fabric.Rect({
+          let canvas = new fabric.Canvas('main',{width:that.$refs.cc.$el.clientWidth,height: that.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
+          let rect = new fabric.Rect({
               top : 25,
               left : 100,
               width : 100,
