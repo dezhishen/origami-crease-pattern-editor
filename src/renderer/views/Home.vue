@@ -25,8 +25,8 @@
         <div class ="layer-tree-switch" @click="handleTreeVis">
           <i class="el-icon-arrow-left" style="padding-top:12px;"></i>
         </div>
-        <el-main  style="background-color:#f3f3f3">
-          <div ref = "canvasContainer" id = "test">
+        <el-main  style="background-color:#f3f3f3" ref = "cc">
+          <div id = "test" style="width:100%;height:100%">
             <canvas  id="main" ref="mainCanvas"></canvas>
           </div>
         </el-main>
@@ -91,33 +91,52 @@ export default Vue.extend({
 
     resizeCanvas() {
       this.canvas = document.getElementById("main");
-      let parentStyle = window.getComputedStyle(this.canvas.parentNode);
-      this.canvas.width = parseInt(parentStyle.width);
-      this.canvas.height = parseInt(parentStyle.height);
+      this.canvas.width = parseInt(this.$refs.cc.$el.clientWidth);
+      this.canvas.height = parseInt(this.$refs.cc.$el.clientHeight);
     },
 
 
   },
   mounted: function () {
     //init
-     this.resizeCanvas();
-
-     var canvas=new fabric.Canvas('main');
-     var rect = new fabric.Rect({
-        top : 25,
-        left : 100,
-        width : 100,
-        height : 100,
-        fill : 'red'
-    });
+    //this.resizeCanvas();
+      
+      var canvas=new fabric.Canvas('main',{width:this.$refs.cc.$el.clientWidth,height: this.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
+      var rect = new fabric.Rect({
+          top : 25,
+          left : 100,
+          width : 100,
+          height : 100,
+          fill : 'white',
+          stroke:'black',
+           transparentCorners: true,
+           hasControls:false,
+           strokeWidth: 1,
+      });
     canvas.add(rect);
     canvas.centerObject(rect);
     canvas.renderAll();
-    window.addEventListener("resize", () => {
-      this.resizeCanvas();
-      console.log("现在在拉伸哦!");
 
+    window.addEventListener("resize", () => {
+      //this.resizeCanvas();
+      
       setTimeout(function() {
+          var canvas=new fabric.Canvas('main',{width:this.$refs.cc.$el.clientWidth,height: this.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
+          var rect = new fabric.Rect({
+              top : 25,
+              left : 100,
+              width : 100,
+              height : 100,
+              fill : 'white',
+              stroke:'black',
+              transparentCorners: true,
+              hasControls:false,
+              strokeWidth: 1,
+          });
+          canvas.add(rect);
+          //canvas.centerObject(rect);
+          canvas.renderAll();
+      
         //todo:重绘
       }, 100);
     });
@@ -139,6 +158,7 @@ export default Vue.extend({
 
 .el-main{
   padding:0px;
+  overflow: hidden;
 }
 
 .layer-tree-container{
@@ -168,9 +188,5 @@ export default Vue.extend({
 }
 #main{
    border: 1px dashed black;
-}
-#test{
-  width: 100%;
-  height: 100%;
 }
 </style>
