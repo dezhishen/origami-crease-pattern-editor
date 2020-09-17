@@ -25,11 +25,8 @@
         <div class ="layer-tree-switch" @click="handleTreeVis">
           <i class="el-icon-arrow-left" style="padding-top:12px;"></i>
         </div>
-        <el-main  style="background-color:#f3f3f3" ref = "cc">
-          <div id = "test" style="width:100%;height:100%">
-            <canvas  id="main" ref="mainCanvas"></canvas>
-          </div>
-        </el-main>
+        <fabric-canvas></fabric-canvas>
+
       </el-container>
     </el-container>
   </div>
@@ -41,10 +38,7 @@ import LayerTree from '../components/LayerTree.vue'
 import GridTab from '../components/GridTab.vue'
 import LineTab from '../components/LineTab.vue'
 import PointTab from '../components/PointTab.vue'
-import Fabric from 'fabric'
-
-Vue.use(Fabric);
-
+import FabricCanvas from  '../components/Canvas.vue'
 export default Vue.extend({
   name: 'Home',
   components: {
@@ -52,6 +46,7 @@ export default Vue.extend({
     GridTab,
     LineTab,
     PointTab,
+    FabricCanvas,
   },
   data: function () {
     return {
@@ -89,59 +84,10 @@ export default Vue.extend({
       console.log(111)
     },
 
-    resizeCanvas() {
-      this.canvas = document.getElementById("main");
-      this.canvas.width = parseInt(this.$refs.cc.$el.clientWidth);
-      this.canvas.height = parseInt(this.$refs.cc.$el.clientHeight);
-    },
-
 
   },
   mounted: function () {
-    //init
-    //this.resizeCanvas();
-      const that = this
-      let canvas = new fabric.Canvas('main',{width:that.$refs.cc.$el.clientWidth,height: that.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
-      let rect = new fabric.Rect({
-          top : 25,
-          left : 100,
-          width : 100,
-          height : 100,
-          fill : 'white',
-          stroke:'black',
-           transparentCorners: true,
-           hasControls:false,
-           strokeWidth: 1,
-      });
-    canvas.add(rect);
-    canvas.centerObject(rect);
-    canvas.renderAll();
-
-    window.addEventListener("resize", () => {
-      //this.resizeCanvas();
-      const that = this
-      setTimeout(function() {
-          let canvas = new fabric.Canvas('main',{width:that.$refs.cc.$el.clientWidth,height: that.$refs.cc.$el.clientHeight,backgroundColor:'white',selection: false});
-          let rect = new fabric.Rect({
-              top : 25,
-              left : 100,
-              width : 100,
-              height : 100,
-              fill : 'white',
-              stroke:'black',
-              transparentCorners: true,
-              hasControls:false,
-              strokeWidth: 1,
-          });
-          canvas.add(rect);
-          //canvas.centerObject(rect);
-          canvas.renderAll();
-      
-        //todo:重绘
-      }, 100);
-    });
-
-
+  
   },
 })
 </script>
@@ -186,7 +132,5 @@ export default Vue.extend({
   border-top-right-radius: 4px;
   display: none;
 }
-#main{
-   border: 1px dashed black;
-}
+
 </style>
