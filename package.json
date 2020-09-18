@@ -85,7 +85,7 @@
     "dev": "run-s rebuild:electron dev-runner",
     "dev-runner": "node _scripts/dev-runner.js",
     "electron-builder-install": "electron-builder install-app-deps",
-    "electron-rebuild": "electron-rebuild",
+    "electron-rebuild": "electron-rebuild  -f -w canvas ",
     "jest": "jest",
     "jest:coverage": "jest --collect-coverage",
     "jest:watch": "jest --watch",

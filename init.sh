@@ -1,0 +1,1 @@
+rm -rf node_modules\ && npm install -g electron-rebuild && electron-rebuild -f -w canvas && npm install --verbose
