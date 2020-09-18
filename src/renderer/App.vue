@@ -17,6 +17,16 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: BlinkMacSystemFont,-apple-system,"Segoe UI";
+  src: url("./assets/style/element-ui/theme/fonts/Segoe-UI.ttf") format("ttf");
+}
+button, input, select, textarea ,span , div{
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI";
+    font-size: inherit;
+    line-height: inherit;
+    color: inherit;
+}
 html{
   height: 100%;
 }
