@@ -21,7 +21,7 @@ export default Vue.extend({
   font-family: BlinkMacSystemFont,-apple-system,"Segoe UI";
   src: url("./assets/style/element-ui/theme/fonts/Segoe-UI.ttf") format("ttf");
 }
-button, input, select, textarea ,span , div{
+* {
     font-family: BlinkMacSystemFont,-apple-system,"Segoe UI";
     font-size: inherit;
     line-height: inherit;
