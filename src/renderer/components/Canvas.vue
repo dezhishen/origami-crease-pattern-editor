@@ -20,26 +20,70 @@ export default Vue.extend({
   },
   methods: {
     canvas(ptr){
-        return new fabric.Canvas('fcanvas',{
+        let cvs = new fabric.Canvas('fcanvas',{
             width:ptr.$refs.cc.$el.clientWidth,
             height: ptr.$refs.cc.$el.clientHeight,
             backgroundColor:'white',
             selection: false
         });
+        cvs.on("mouse:wheel",  function(opt) {
+            var delta = opt.e.deltaY;
+            var zoom = cvs.getZoom();
+            zoom *= 0.999 ** delta;
+            if (zoom > 20) zoom = 20;
+            if (zoom < 0.01) zoom = 0.01;
+            cvs.zoomToPoint({ x: opt.e.offsetX, y: opt.e.offsetY }, zoom);
+            opt.e.preventDefault();
+            opt.e.stopPropagation();
+        });
+        cvs.on('mouse:down', function(opt) {
+            var evt = opt.e;
+            if (evt.altKey === true) {
+                this.isDragging = true;
+                this.selection = false;
+                this.lastPosX = evt.clientX;
+                this.lastPosY = evt.clientY;
+        }
+        });
+        cvs.on('mouse:move', function(opt) {
+        if (this.isDragging) {
+            var e = opt.e;
+            var vpt = this.viewportTransform;
+            vpt[4] += e.clientX - this.lastPosX;
+            vpt[5] += e.clientY - this.lastPosY;
+            this.requestRenderAll();
+            this.lastPosX = e.clientX;
+            this.lastPosY = e.clientY;
+        }
+        });
+        cvs.on('mouse:up', function(opt) {
+            this.setViewportTransform(this.viewportTransform);
+            this.isDragging = false;
+            this.selection = true;
+        });
+        return cvs;
     },
 
     primeRect(sideLen){
-        return new fabric.Rect({
+        let rct = new fabric.Rect({
             top : 25,
             left : 100,
             width : sideLen,
             height : sideLen,
             fill : 'white',
-            stroke:'black',
+            stroke:'indigo',
+            centeredScaling:true,
+            centeredRotation:true,
+            originX: 'center',
+            originY: 'center', 
             transparentCorners: true,
             hasControls:false,
             strokeWidth: 1,
+            evented: false,
+            selectable: false ,
+            
         });
+        return rct;
     },
 
 
@@ -80,6 +124,6 @@ export default Vue.extend({
 </script>
 <style scoped>
     #fcanvas{
-        border: 1px dashed black;
+        border: 1px solid silver;
     }
 </style>>
