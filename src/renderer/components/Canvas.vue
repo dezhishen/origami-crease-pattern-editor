@@ -28,12 +28,12 @@ export default Vue.extend({
         });
     },
 
-    primeRect(){
+    primeRect(sideLen){
         return new fabric.Rect({
             top : 25,
             left : 100,
-            width : 300,
-            height : 300,
+            width : sideLen,
+            height : sideLen,
             fill : 'white',
             stroke:'black',
             transparentCorners: true,
@@ -43,21 +43,8 @@ export default Vue.extend({
     },
 
 
-    renderCanvas:function(init,ptr){
-        let canvas = undefined;
-        if(ptr.fCanvas === undefined){
-            canvas = ptr.canvas(ptr);
-        }else{
-            canvas = ptr.fCanvas;
-        } 
+    renderCanvas:function(init,canvas,rect){
 
-        let rect = undefined;
-        if(ptr.pRect === undefined){
-            rect = ptr.primeRect();
-        }else{
-            rect = ptr.pRect;
-        }
-        
         if(init){
             canvas.centerObject(rect);
         }else{
@@ -72,12 +59,20 @@ export default Vue.extend({
   },
  mounted: function () {
     const that = this
-    that.renderCanvas(true,that);
+    this.fCanvas = this.canvas(this);
+    
+    let dWidth = this.$refs.cc.$el.clientWidth;
+    let dHeight = this.$refs.cc.$el.clientHeight;
+
+    let sideLen =  dWidth> dHeight ? 0.9 * dHeight : 0.9 * dWidth;
+    this.pRect = this.primeRect(sideLen);
+
+    this.renderCanvas(true,this.fCanvas,this.pRect);
     window.addEventListener("resize", () => {
-        
+        that.fCanvas.setWidth(that.$refs.cc.$el.clientWidth);
+        that.fCanvas.setHeight(that.$refs.cc.$el.clientHeight);
         setTimeout(function() {
-            console.log(that);
-            that.renderCanvas(false,that);
+            that.renderCanvas(false,that.fCanvas,that.pRect);
         }, 100);
     });
   },
